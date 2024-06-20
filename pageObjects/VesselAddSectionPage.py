@@ -1,0 +1,71 @@
+from selenium.webdriver.common.by import By
+from utilities.BaseClass import BaseClass
+
+
+class VesselAddSectionPage(BaseClass):
+    folderOne = (By.XPATH, "//h4[@title='folder_one']")
+    folderTwo = (By.XPATH, "//h4[@title='Folder_two']")
+    folderThree = (By.XPATH, "//h4[@title='Folder_three']")
+    selectOne = (By.XPATH, "(//button[@class='vs-con-dropdown parent-dropdown'])[1]")
+    mapOne = (By.XPATH, "(//div[@class='pin cursor-grab'])[1]")
+    selectTwo = (By.XPATH, "(//button[@class='vs-con-dropdown parent-dropdown'])[2]")
+    mapTwo = (By.XPATH, "(//div[@class='pin cursor-grab'])[2]")
+    selectThree = (By.XPATH, "(//button[@class='vs-con-dropdown parent-dropdown'])[3]")
+    mapThree = (By.XPATH, "(//div[@class='pin cursor-grab'])[3]")
+    addVessel = (By.XPATH, "//span[contains(text(),'Add Vessel')]")
+    drag = (By.XPATH, "//div[@class='text-white yellow-pin']")
+    target = (By.XPATH, "//img[@class='cursor-auto']")
+    redTwo = (By.XPATH, "//div[@class='text-white red-pin']")
+    dragTwo = (By.XPATH, "(//div[@class='text-white yellow-pin'])[2]")
+    dragThree = (By.XPATH, "(//div[@class='text-white yellow-pin'])[3]")
+    dragSubFolder = (By.XPATH, "//div[@class='text-white yellow-pin']")
+
+    def __init__(self, driver):
+        self.driver = driver
+
+    def vesselAddSection(self, getData):
+        self.webScroll(getData["Scrolling"])
+        self.section(getData["SectionName"])
+        self.section(getData["SectionNameOne"])
+        self.sleep(2)
+        self.elementClickByJS(self.driver.find_element(*VesselAddSectionPage.selectOne))
+        self.createMap()
+        self.elementClickByJS(self.driver.find_element(*VesselAddSectionPage.mapOne))
+        self.elementClick(self.driver.find_element(*VesselAddSectionPage.mapOne))
+        self.dragTheLocationOne(self.driver.find_element(*VesselAddSectionPage.drag))
+        self.sleep(2)
+        self.elementClickByJS(self.driver.find_element(*VesselAddSectionPage.selectTwo))
+        self.createMap()
+        self.elementClick(self.driver.find_element(*VesselAddSectionPage.mapTwo))
+        self.elementClickByJS(self.driver.find_element(*VesselAddSectionPage.mapTwo))
+        self.dragTheLocationTwo(self.driver.find_element(*VesselAddSectionPage.dragTwo))
+        self.sleep(2)
+        self.elementClickByJS(self.driver.find_element(*VesselAddSectionPage.selectThree))
+        self.createMap()
+        self.elementClickByJS(self.driver.find_element(*VesselAddSectionPage.mapThree))
+        self.elementClick(self.driver.find_element(*VesselAddSectionPage.mapThree))
+        self.dragTheLocationThree(self.driver.find_element(*VesselAddSectionPage.dragThree))
+        self.elementClick(self.driver.find_element(*VesselAddSectionPage.folderOne))
+        self.subFolderClick(getData["SubFolderName"])
+        self.subFolderMapping()
+        self.sleep(3)
+        self.dragTheLocationSubFolder(self.driver.find_element(*VesselAddSectionPage.dragSubFolder))
+        self.webScroll(getData["Scrolling"])
+        self.sleep(3)
+        self.elementClick(self.driver.find_element(*VesselAddSectionPage.folderTwo))
+        self.subFolderClick(getData["SubFolderNameTwo"])
+        self.subFolderMapping()
+        self.dragTheLocationSubFolder(self.driver.find_element(*VesselAddSectionPage.dragSubFolder))
+        self.webScroll(getData["Scrolling"])
+        self.sleep(3)
+        self.elementClick(self.driver.find_element(*VesselAddSectionPage.folderThree))
+        self.subFolderClick(getData["SubFolderNameThree"])
+        self.subFolderMapping()
+        self.dragTheLocationSubFolder(self.driver.find_element(*VesselAddSectionPage.dragSubFolder))
+        self.webScroll(getData["Scrolling"])
+        self.sleep(3)
+
+        self.elementClickByJS(self.driver.find_element(*VesselAddSectionPage.addVessel))
+        self.sleep(6)
+
+
